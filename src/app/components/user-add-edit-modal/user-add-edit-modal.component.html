@@ -1,0 +1,25 @@
+<h1 mat-dialog-title>{{ userData ? "Edit user" : "New user" }}</h1>
+
+<div class="modal-content">
+  <form class="user-form" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <div class="modal-input-group">
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" />
+        <mat-error *ngIf="userForm.controls['name'].hasError('required')">
+          Name is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>User Id</mat-label>
+        <input matInput formControlName="id" />
+      </mat-form-field>
+    </div>
+    <div class="modal-buttons">
+      <button mat-button color="secondary" type="button" (click)="onNoClick()">
+        Cancel</button
+      ><button mat-button color="primary" type="submit">Save</button>
+    </div>
+  </form>
+</div>

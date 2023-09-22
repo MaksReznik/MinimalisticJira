@@ -1,0 +1,36 @@
+<mat-expansion-panel hideToggle>
+  <mat-expansion-panel-header>
+    <mat-panel-title> Users </mat-panel-title>
+  </mat-expansion-panel-header>
+  <div class="list-item">
+    <div class="list-item-name">Name</div>
+    <div class="list-item-task">Task</div>
+    <div class="item-actions">Actions</div>
+  </div>
+  <div *ngFor="let user of userList" class="list-item">
+    <div class="list-item-name">{{ user.name }}</div>
+    <div class="list-item-task">{{ user.taskName ?? "-" }}</div>
+    <div class="item-actions">
+      <mat-icon
+        class="item-actions-button"
+        aria-label="edit button"
+        fontIcon="edit"
+        (click)="editUser(user)"
+      ></mat-icon>
+      <mat-icon
+        class="item-actions-button"
+        aria-label="delete button"
+        fontIcon="delete"
+        (click)="deleteUser(user)"
+      ></mat-icon>
+    </div>
+  </div>
+  <div class="no-items" *ngIf="!userList.length">
+    There are no available users
+  </div>
+  <mat-action-row>
+    <button mat-button color="primary" (click)="newUser()">
+      Create new user
+    </button>
+  </mat-action-row>
+</mat-expansion-panel>

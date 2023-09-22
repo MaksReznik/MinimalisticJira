@@ -1,0 +1,12 @@
+.modal-content {
+  padding: 10px;
+}
+.modal-input-group {
+  display: grid;
+  justify-content: space-between;
+  grid-template-columns: 48% 48%;
+}
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+}

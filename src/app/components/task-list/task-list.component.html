@@ -1,0 +1,42 @@
+<mat-expansion-panel hideToggle>
+  <mat-expansion-panel-header>
+    <mat-panel-title> Tasks </mat-panel-title>
+  </mat-expansion-panel-header>
+  <div class="list-item">
+    <div class="list-item-name">Task Name</div>
+    <div class="list-item-assignee">Task assignee</div>
+    <div class="list-item-creation">Date of creation</div>
+    <div class="list-item-status">Status</div>
+    <div class="item-actions">Actions</div>
+  </div>
+  <div *ngFor="let task of taskList" class="list-item">
+    <div class="list-item-name">{{ task.name }}</div>
+    <div class="list-item-assignee">{{ task.assigneeName ?? "-" }}</div>
+    <div class="list-item-creation">
+      {{ task.dateOfCreation | date : "short" }}
+    </div>
+    <div class="list-item-status">{{ task.state }}</div>
+    <div class="item-actions">
+      <mat-icon
+        class="item-actions-button"
+        aria-label="edit button"
+        fontIcon="edit"
+        (click)="editTask(task)"
+      ></mat-icon>
+      <mat-icon
+        class="item-actions-button"
+        aria-label="delete button"
+        fontIcon="delete"
+        (click)="deleteTask(task)"
+      ></mat-icon>
+    </div>
+  </div>
+  <div class="no-items" *ngIf="!taskList.length">
+    There are no available tasks
+  </div>
+  <mat-action-row>
+    <button mat-button color="primary" (click)="newTask()">
+      Create new task
+    </button>
+  </mat-action-row>
+</mat-expansion-panel>

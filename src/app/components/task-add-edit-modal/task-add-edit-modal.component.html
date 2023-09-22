@@ -1,0 +1,85 @@
+<h1 mat-dialog-title>{{ taskData ? "Edit task" : "New task" }}</h1>
+
+<div class="modal-content">
+  <form class="task-form" [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+    <div class="modal-input-group">
+      <mat-form-field class="modal-input">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" />
+        <mat-error *ngIf="taskForm.controls['name'].hasError('required')">
+          Name is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="modal-input">
+        <mat-label>State</mat-label>
+        <mat-select formControlName="state">
+          <mat-option
+            *ngFor="let state of taskStates"
+            [value]="state"
+            [disabled]="
+              (state === TaskStateEnum.Done ||
+                state === TaskStateEnum.InProgress) &&
+              !this.taskForm.controls['assigneeId'].value
+            "
+          >
+            {{ state }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="modal-input">
+        <mat-label>Assignee</mat-label>
+        <mat-select formControlName="assigneeId">
+          <mat-option *ngFor="let user of userList" [value]="user.id">
+            {{ user.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="modal-input">
+        <mat-label>Task id</mat-label>
+        <input matInput formControlName="id" />
+      </mat-form-field>
+
+      <mat-form-field class="modal-input">
+        <mat-label>Date of creation</mat-label>
+        <input
+          matInput
+          [disabled]="true"
+          [value]="taskForm.controls['dateOfCreation'].value | date : 'short'"
+        />
+      </mat-form-field>
+
+      <mat-form-field class="modal-input">
+        <mat-label>Date of modification</mat-label>
+        <input
+          matInput
+          [disabled]="true"
+          [value]="
+            taskForm.controls['dateOfModification'].value | date : 'short'
+          "
+        />
+      </mat-form-field>
+      <mat-form-field class="modal-input">
+        <mat-label>Description</mat-label>
+        <textarea
+          class="no-resize"
+          matInput
+          formControlName="description"
+          rows="6"
+        ></textarea>
+        <mat-error
+          *ngIf="taskForm.controls['description'].hasError('required')"
+        >
+          Description is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="modal-buttons">
+      <button mat-button color="secondary" type="button" (click)="onNoClick()">
+        Cancel</button
+      ><button mat-button color="primary" type="submit">Save</button>
+    </div>
+  </form>
+</div>

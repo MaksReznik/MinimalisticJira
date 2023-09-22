@@ -1,0 +1,23 @@
+.modal-content {
+  padding: 10px;
+}
+.modal-input-group {
+  display: grid;
+  justify-content: space-between;
+  grid-template-columns: 48% 48%;
+}
+.modal-input:nth-child(even):last-child {
+  grid-column-end: span 1;
+}
+
+.modal-input:nth-child(odd):last-child {
+  grid-column-end: span 2;
+}
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.no-resize {
+  resize: none;
+}
